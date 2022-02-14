@@ -1,22 +1,17 @@
 import Component from "@ember/component";
-import { ajax } from "discourse/lib/ajax";
-import { action } from "@ember/object";
-import { inject as service } from "@ember/service";
-import { readOnly } from "@ember/object/computed";
+import { action, computed } from "@ember/object";
 
 export default Component.extend({
-  moreHref: readOnly("category.url"),
-
   init() {
     this._super(...arguments);
 
-    if (!this.category) return;
+    let paramsFilter = this.data.tag ? `tag/${this.data.tag}/l/${this.data.filter}` : this.data.filter
 
     const filter = {
-      filter: "latest",
-      params: {
-        category: this.category.id,
-      },
+      filter: paramsFilter,
+      params: this.data.category ? {
+        category: this.data.category.id
+      } : {},
     };
 
     this.set("isLoading", true)
@@ -24,11 +19,21 @@ export default Component.extend({
     this.store.findFiltered("topicList", filter).then((topicList) => {
       this.set(
         "topicList",
-        topicList.topics.slice(0, settings.max_list_length)
+        topicList.topics.slice(0, this.data.length)
       );
 
       this.set("isLoading", false)
     });
+  },
+
+  @computed("settings.more_topics_button_text")
+  get moreTopicsButtonText() {
+    return settings.more_topics_button_text;
+  },
+
+  @computed("settings.post_button_text")
+  get postButtonText() {
+    return settings.post_button_text;
   },
 
   @action
@@ -42,7 +47,7 @@ export default Component.extend({
       Discourse.__container__.lookup("controller:composer").open({
         action: "createTopic",
         draftKey: "createTopic",
-        categoryId: this.category.id,
+        categoryId: this.data.category ? this.data.category.id : null,
       });
     } else {
       this.router.transitionTo("login");

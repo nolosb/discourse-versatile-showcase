@@ -1,0 +1,8 @@
+<div class="header-wrapper">
+  <h2>{{data.title}}</h2>
+    <a href="{{data.link}}" class="feed-link">{{moreTopicsButtonText}}</a>
+    {{#d-button action=createTopic class="btn-default"}}{{postButtonText}}{{/d-button}}
+</div>
+{{#conditional-loading-spinner condition=isLoading}}
+  {{topic-list topics=topicList showPosters=true}}
+{{/conditional-loading-spinner}}

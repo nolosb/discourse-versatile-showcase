@@ -1,35 +1,18 @@
-show_as_sidebar:
-  type: bool
-  default: false
-  description: "If enabled, the showcased categories will only be rendered in a sidebar on the latest page."
-featured_topic_lists_title:
+more_topics_button_text:
   type: string
-  default: "Showcased Categories"
-  description: "Title for showcased categories lists section"
-feed_one_title:
+  default: "More"
+  description: "Text displayed on More button"
+post_button_text:
   type: string
-  default: "Custom List One"
-  description: "Title for left area of topics on homepage"
-feed_one_category:
+  default: "Post"
+  description: "Text displayed on Post button"
+feed_list:
+  placeholder: "Title, List length, Filter, Tag, Category id, Link"
+  client: true
+  default: "Latest Topics, 3, latest, , , /latest| Top Topics, 3, top, , , /top| Lounge, 3, latest, , 4, /c/lounge/4| Featured Tag,3,latest,featured,,/tag/featured"
   type: list
-  list_type: category
-  default: ""
-  description: "Choose only ONE category for the Feed One topic list"
-feed_two_title:
-  type: string
-  default: "Custom List Two"
-  description: "Title for right area of topics on homepage"
-feed_two_category:
-  type: list
-  list_type: category
-  default: ""
-  description: "Choose only ONE category for the Feed Two topic list"
-max_list_length:
-  type: integer
-  default: 5
-  min: 1
-  max: 5
-  description: "How many topics should appear in the custom lists?"
+  description: |
+    Each line should be in the format of <code>Feed title</code>, <code>List length</code>, <code>List filter</code>, <code>Tag filter</code>, <code>Category filter</code>, <code>Feed link</code>.
 plugin_outlet:
   type: enum
   default: "above-main-container"

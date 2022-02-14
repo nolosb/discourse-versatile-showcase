@@ -21,25 +21,37 @@ export default Component.extend({
   @observes("shouldShow")
   _updateBodyClasses() {
     const shouldCleanup = this.isDestroying || this.isDestroyed;
-    if (!shouldCleanup && this.shouldShow && settings.show_as_sidebar) {
-      document.body.classList.add("showcased-categories-sidebar");
-    } else {
-      document.body.classList.remove("showcased-categories-sidebar");
-    }
   },
 
   get categoriesLoaded() {
     return Category.list().length !== 0;
   },
 
-  get category1() {
-    if (!this.categoriesLoaded) return false;
-    return Category.findById(settings.feed_one_category);
-  },
+  get list() {
+    if(settings.feed_list <= 0) return [];
 
-  get category2() {
-    if (!this.categoriesLoaded) return false;
-    return Category.findById(settings.feed_two_category);
+    const list_data = settings.feed_list.split("|").map((item, index) => {
+      const classes = ["col", `col-${index}`];
+      const length = settings.feed_list.split("|").length;
+
+      if (length % 2 != 0 && index === length - 1) {
+        classes.push("last");
+      }
+
+      const data = item.split(",");
+
+      return {
+        title: data[0].trim(),
+        length: data[1].trim(),
+        filter: data[2].trim(),
+        tag: data[3].trim(),
+        category: Category.findById(data[4].trim()),
+        link: data[5].trim(),
+        classes: classes.join(" ")
+      }
+    });
+
+    return list_data;
   },
 
   @discourseComputed("router.currentRouteName")
@@ -49,5 +61,5 @@ export default Component.extend({
     return currentRouteName === `discovery.${defaultHomepage()}` || showSidebar;
   },
 
-  showTopicLists: and("shouldShow", "category1", "category2")
+  showTopicLists: and("shouldShow", "list.length")
 });
