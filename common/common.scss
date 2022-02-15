@@ -1,40 +1,16 @@
-// Variables
-$topic-height: 70;
-
-// Layout
+// Box Layout
 .custom-homepage-columns {
   display: flex;
   flex-wrap: wrap;
-  margin: 2rem 0;
-  &.wrap {
-    padding: 0;
-  }
+  margin: 0 0 2rem 0;
+  row-gap: 3rem;
+  column-gap: 3rem;
   .col {
-    flex: 1 0 33%;
-    margin-bottom: 1.5em;
-    &:nth-child(odd) {
-      margin-right: 1.5em;
-    }
-    &:nth-child(even) {
-      margin-left: 1.5em;
-    }
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-  @media screen and (max-width: 750px) {
-    .col,
-    .col:nth-child(odd),
-    .col:nth-child(even) {
-      margin: 0 0 2em 0;
-    }
-    .col:last-child {
-      margin: 0;
-    }
+    flex: 1 1 45%;
   }
 }
 
-// Components
+// List Layout
 .custom-homepage-columns {
   .header-wrapper {
     display: flex;
@@ -50,21 +26,24 @@ $topic-height: 70;
     }
   }
   .loading-container {
-    min-height: calc(#{$topic-height}px * 1);
     .topic-list {
       margin: 0;
       .topic-list-body {
         border: none;
         .topic-list-item {
-          height: #{$topic-height}px;
+          min-height: 70px;
           &:nth-child(odd) {
             background: var(--primary-very-low);
           }
           .main-link {
-            width: 80%;
+            .link-bottom-line {
+              .badge-wrapper {
+                // FIX: there's a nowrap declaration in core and it keeps boxes from adjusting size based on flex settings
+                white-space: normal;
+              }
+            }
           }
         }
-
       }
     }
   }
