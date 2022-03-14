@@ -19,4 +19,5 @@ plugin_outlet:
   choices:
     - "above-main-container"
     - "below-site-header"
-  description: "Advanced setting for additional customization"
+    - "discovery-list-container-top"
+  description: "Advanced layout setting"
