@@ -56,9 +56,7 @@ export default Component.extend({
 
   @discourseComputed("router.currentRouteName")
   shouldShow(currentRouteName) {
-    let showSidebar =
-      settings.show_as_sidebar && currentRouteName === "discovery.latest";
-    return currentRouteName === `discovery.${defaultHomepage()}` || showSidebar;
+    return currentRouteName === `discovery.${defaultHomepage()}`;
   },
 
   showTopicLists: and("shouldShow", "list.length")
