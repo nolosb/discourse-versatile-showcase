@@ -7,12 +7,12 @@ post_button_text:
   default: "Post"
   description: "Text displayed on Post button"
 feed_list:
-  placeholder: "Title, List length, Filter, Tag, Category id, Link"
+  placeholder: "Title, List length, Filter, Tag, Category id, Link, solved"
   client: true
-  default: "Latest Topics, 3, latest, , , /latest| Top Topics, 3, top, , , /top| Lounge, 3, latest, , 4, /c/lounge/4| Featured Tag,3,latest,featured,,/tag/featured"
+  default: "Latest Topics, 3, latest, , , /latest, true| Top Topics, 3, top, , , /top,| Lounge, 3, latest, , 4, /c/lounge/4,| Featured Tag,3,latest,featured,,/tag/featured,"
   type: list
   description: |
-    Each line should be in the format of <code>Feed title</code>, <code>List length</code>, <code>List filter</code>, <code>Tag filter</code>, <code>Category filter</code>, <code>Feed link</code>.
+    Each line should be in the format of <code>Feed title</code>, <code>List length</code>, <code>List filter</code>, <code>Tag filter</code>, <code>Category filter</code>, <code>Feed link</code>, <code>Solved(true/false)</code>.
 plugin_outlet:
   type: enum
   default: "above-main-container"
