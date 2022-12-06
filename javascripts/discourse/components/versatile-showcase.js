@@ -11,11 +11,13 @@ export default Component.extend({
     }
 
     if (this.data.tag) {
-      params.tag = this.data.tag;
+      params.tags = this.data.tag;
     }
 
-    if (this.data.solved) {
+    if (this.data.solved === "true") {
       params.solved = 'yes';
+    } else if (this.data.solved === "false") {
+      params.solved = 'no'
     }
 
     const filter = {
