@@ -47,6 +47,7 @@ export default Component.extend({
         tag: data[3].trim(),
         category: Category.findById(data[4].trim()),
         link: data[5].trim(),
+        solved: data.length > 6 ? data[6].trim() : null,
         classes: classes.join(" ")
       }
     });

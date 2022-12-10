@@ -4,14 +4,25 @@ import { action, computed } from "@ember/object";
 export default Component.extend({
   init() {
     this._super(...arguments);
+    let params = {};
 
-    let paramsFilter = this.data.tag ? `tag/${this.data.tag}/l/${this.data.filter}` : this.data.filter
+    if (this.data.category) {
+      params.category = this.data.category.id;
+    }
+
+    if (this.data.tag) {
+      params.tags = this.data.tag;
+    }
+
+    if (this.data.solved === "true") {
+      params.solved = 'yes';
+    } else if (this.data.solved === "false") {
+      params.solved = 'no'
+    }
 
     const filter = {
-      filter: paramsFilter,
-      params: this.data.category ? {
-        category: this.data.category.id
-      } : {},
+      filter: this.data.filter,
+      params,
     };
 
     this.set("isLoading", true)
