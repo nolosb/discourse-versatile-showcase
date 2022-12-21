@@ -13,6 +13,17 @@ feed_list:
   type: list
   description: |
     Each line should be in the format of <code>Feed title</code>, <code>List length</code>, <code>List filter</code>, <code>Tag filter</code>, <code>Category filter</code>, <code>Feed link</code>, <code>Solved(true/false)</code>.
+show_on:
+  default: homepage
+  type: enum
+  choices:
+    - homepage
+    - discovery
+    - discovery.latest
+    - discovery.categories
+    - discovery.top
+    - all
+  description: Advanced route setting
 plugin_outlet:
   type: enum
   default: "above-main-container"
@@ -20,4 +31,4 @@ plugin_outlet:
     - "above-main-container"
     - "below-site-header"
     - "discovery-list-container-top"
-  description: "Advanced layout positioning"
+  description: Advanced layout positioning

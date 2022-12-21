@@ -55,9 +55,26 @@ export default Component.extend({
     return list_data;
   },
 
-  @discourseComputed("router.currentRouteName")
-  shouldShow(currentRouteName) {
-    return currentRouteName === `discovery.${defaultHomepage()}`;
+  @discourseComputed("router.currentRouteName", "router.currentURL")
+  shouldShow(currentRouteName, currentURL) {
+    if (settings.show_on === "all") {
+      return true;
+    }
+    if (settings.show_on === "discovery") {
+      return currentRouteName.indexOf("discovery") > -1;
+    }
+    if (settings.show_on === "homepage") {
+      return currentRouteName == `discovery.${defaultHomepage()}`;
+    }
+    if (settings.show_on === "discovery.latest") {
+      return currentRouteName == `discovery.latest`;
+    }
+    if (settings.show_on === "discovery.categories") {
+      return currentRouteName == `discovery.categories`;
+    }
+    if (settings.show_on === "discovery.top") {
+      return currentRouteName == `discovery.top`;
+    }
   },
 
   showTopicLists: and("shouldShow", "list.length")
